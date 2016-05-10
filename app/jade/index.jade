@@ -1,0 +1,22 @@
+doctype html
+html
+  title hayoosh
+  link(rel='stylesheet', type='text/css', href='./css/styles.css')
+  link(rel='stylesheet', href='/path/to/flickity.css', media='screen')
+
+  body
+    .gallery-container gallery-container
+      .title
+        h1.hero Image Gallery
+        p.hero Scroll to browse the image gallery
+      .gallery
+        .gallery__item.gallery__item--selecte__item 1
+        .gallery__item 2
+        .gallery__item 3
+        .gallery__item 4
+        .gallery__item 5
+      .gallery-controller
+        .gallery__button.gallery__button--left left
+        .gallery__button.gallery__button--right right
+    script(scr='./js/gallery-controller.js')
+
