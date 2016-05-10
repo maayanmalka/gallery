@@ -5,7 +5,6 @@ var gulp = require('gulp');
 var less = require('gulp-less');
 var jade = require('gulp-jade');
 var browserSync = require('browser-sync').create();
-var useref = require('gulp-useref');
 var uglify = require('gulp-uglify');
 var gulpIf = require('gulp-if');
 var cssnano = require('gulp-cssnano');
@@ -13,22 +12,33 @@ var imagemin = require('gulp-imagemin');
 var cache = require('gulp-cache');
 var del = require('del');
 var runSequence = require('run-sequence');
+var reload = browserSync.reload;
+var plumber = require('gulp-plumber');
+var rename = require('gulp-rename');
+// var useref = require('gulp-useref');
 
-
+gulp.task('scripts', function(){
+  gulp.src(['app/scripts/**/*.js', '!dist/scripts/**/*.min.js'])
+   .pipe(plumber())
+   // .pipe(rename({suffix : '.min'}))
+   .pipe(uglify())
+   .pipe(gulp.dest('dist/scripts'))
+   .pipe(reload({stream:true}));
+});
 
 gulp.task('less', function () {
   return gulp.src('app/less/**/*.less') // Get source files with gulp.src
     .pipe(less()) // Sends it through a gulp plugin
-    .pipe(gulp.dest('app/css')) // Outputs the file in the destination folder
+    .pipe(gulp.dest('dist/css')) // Outputs the file in the destination folder
     .pipe(browserSync.reload({
       stream: true
     }))
 })
 
 gulp.task('jade', function () {
-  return gulp.src('app/jade/**/*.jade') // Get source files with gulp.src
+  return gulp.src('app/**/*.jade') // Get source files with gulp.src
     .pipe(jade()) // Sends it through a gulp plugin
-    .pipe(gulp.dest('app')) // Outputs the file in the destination folder
+    .pipe(gulp.dest('dist')) // Outputs the file in the destination folder
     .pipe(browserSync.reload({
       stream: true
     }))
@@ -37,20 +47,20 @@ gulp.task('jade', function () {
 gulp.task('browserSync', function() {
   browserSync.init({
     server: {
-      baseDir: 'app'
+      baseDir: 'dist'
     },
   })
 })
 
-gulp.task('useref', function(){
-  return gulp.src('app/**/*.html')
-    .pipe(useref())
-    // Minifies only if it's a JavaScript file
-    .pipe(gulpIf('*.js', uglify()))
-    // Minifies only if it's a CSS file
-    .pipe(gulpIf('*.css', cssnano()))
-    .pipe(gulp.dest('dist'))
-});
+// gulp.task('useref', function(){
+//   return gulp.src('dist/**/*.html')
+//     .pipe(useref())
+//     // Minifies only if it's a JavaScript file
+//     .pipe(gulpIf('*.js', uglify()))
+//     // Minifies only if it's a CSS file
+//     .pipe(gulpIf('*.css', cssnano()))
+//     .pipe(gulp.dest('dist'))
+// });
 
 gulp.task('images', function(){
   return gulp.src('app/images/**/*.+(png|jpg|jpeg|gif|svg)')
@@ -74,22 +84,24 @@ gulp.task('cache:clear', function (callback) {
 return cache.clearAll(callback)
 })
 
+
 gulp.task('watch', ['browserSync', 'less'] , function (){
   gulp.watch('app/less/**/*.less', ['less']);
-  gulp.watch('app/jade/**/*.jade', ['jade']);
+  gulp.watch('app/**/*.jade', ['jade']);
+  gulp.watch('app/scripts/**/*.js', ['scripts']);
   gulp.watch('app/**/*.html', browserSync.reload);
-  gulp.watch('app/**/*.js', browserSync.reload);
+  gulp.watch('app/scripts/*.js', browserSync.reload);
 })
 
 gulp.task('build', function (callback) {
   runSequence('clean:dist',
-    ['less', 'jade', 'useref', 'images', 'fonts'],
+    ['less', 'jade', 'scripts', 'images', 'fonts'],
     callback
   )
 })
 
 gulp.task('default', function (callback) {
-  runSequence(['build', 'less', 'jade', 'browserSync', 'watch'],
+  runSequence(['build', 'browserSync', 'watch'],
     callback
   )
 })
