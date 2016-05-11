@@ -4,13 +4,27 @@
 
 
 // // my-script.js
-document.addEventListener("DOMContentLoaded", function() {
-    // this function runs when the DOM is ready, i.e. when the document has been parsed
 
-moshe();
-    // document.getElementById("user-greeting").textContent = "Welcome back, Bart";
+$(document).ready(function() {
+
+  $('.gallery__button--right').click( function (){
+      gallerySildeRight ();
+  })
+
+  $('.gallery__button--left').click( function (){
+      gallerySildeLeft ();
+  })
+
+
+
 });
 
-var moshe = function(){
+
+// functions
+var gallerySildeRight = function(){
+  $('.gallery').hide()
+};
+
+var gallerySildeLeft = function(){
   $('.gallery').show()
 };

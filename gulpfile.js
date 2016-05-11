@@ -27,10 +27,10 @@ gulp.task('scripts', function(){
 });
 
 gulp.task('less', function () {
-  return gulp.src('app/less/**/*.less') // Get source files with gulp.src
+  return gulp.src('app/**/*.less') // Get source files with gulp.src
     .pipe(less()) // Sends it through a gulp plugin
     .pipe(gulpIf('*.css', cssnano()))
-    .pipe(gulp.dest('dist/css')) // Outputs the file in the destination folder
+    .pipe(gulp.dest('dist')) // Outputs the file in the destination folder
     .pipe(browserSync.reload({
       stream: true
     }))
@@ -81,7 +81,7 @@ gulp.task('cache:clear', function (callback) {
 
 
 gulp.task('watch', ['browserSync', 'less'] , function (){
-  gulp.watch('app/less/**/*.less', ['less']);
+  gulp.watch('app/**/*.less', ['less']);
   gulp.watch('app/**/*.jade', ['jade']);
   gulp.watch('app/scripts/**/*.js', ['scripts']);
   gulp.watch('app/**/*.html', browserSync.reload);
