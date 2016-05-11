@@ -19,11 +19,11 @@ var rename = require('gulp-rename');
 
 gulp.task('scripts', function(){
   gulp.src(['app/scripts/**/*.js', '!dist/scripts/**/*.min.js'])
-   .pipe(plumber())
+   // .pipe(plumber())
    // .pipe(rename({suffix : '.min'}))
-   .pipe(uglify())
+   // .pipe(uglify())
    .pipe(gulp.dest('dist/scripts'))
-   .pipe(reload({stream:true}));
+   // .pipe(reload({stream:true}));
 });
 
 gulp.task('less', function () {
@@ -47,20 +47,11 @@ gulp.task('jade', function () {
 gulp.task('browserSync', function() {
   browserSync.init({
     server: {
-      baseDir: 'dist'
+      baseDir: './dist'
     },
   })
 })
 
-// gulp.task('useref', function(){
-//   return gulp.src('dist/**/*.html')
-//     .pipe(useref())
-//     // Minifies only if it's a JavaScript file
-//     .pipe(gulpIf('*.js', uglify()))
-//     // Minifies only if it's a CSS file
-//     .pipe(gulpIf('*.css', cssnano()))
-//     .pipe(gulp.dest('dist'))
-// });
 
 gulp.task('images', function(){
   return gulp.src('app/images/**/*.+(png|jpg|jpeg|gif|svg)')
@@ -81,7 +72,7 @@ gulp.task('clean:dist', function() {
 })
 
 gulp.task('cache:clear', function (callback) {
-return cache.clearAll(callback)
+  return cache.clearAll(callback)
 })
 
 
@@ -90,7 +81,7 @@ gulp.task('watch', ['browserSync', 'less'] , function (){
   gulp.watch('app/**/*.jade', ['jade']);
   gulp.watch('app/scripts/**/*.js', ['scripts']);
   gulp.watch('app/**/*.html', browserSync.reload);
-  gulp.watch('app/scripts/*.js', browserSync.reload);
+  // gulp.watch('app/scripts/*.js', browserSync.reload);
 })
 
 gulp.task('build', function (callback) {
@@ -108,3 +99,12 @@ gulp.task('default', function (callback) {
 
 
 
+// gulp.task('useref', function(){
+//   return gulp.src('dist/**/*.html')
+//     .pipe(useref())
+//     // Minifies only if it's a JavaScript file
+//     .pipe(gulpIf('*.js', uglify()))
+//     // Minifies only if it's a CSS file
+//     .pipe(gulpIf('*.css', cssnano()))
+//     .pipe(gulp.dest('dist'))
+// });

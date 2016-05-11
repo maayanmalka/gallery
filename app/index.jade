@@ -1,12 +1,14 @@
 doctype html
 html
-  title hayoosh
-  link(rel='stylesheet', type='text/css', href='./css/styles.css')
-  script(scr='./scripts/gallery-controller.js')
+  head
+    title hayoosh
+    link(rel='stylesheet', type='text/css', href='../css/styles.css')
+    script(type='text/javascript', src='./scripts/gallery-controller.js')
 
   body
     .gallery-container gallery-container
       .title
+        #user-greeting greeting text
         h1.hero Image Gallery
         p.hero Scroll to browse the image gallery
       .gallery
