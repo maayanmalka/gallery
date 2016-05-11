@@ -19,16 +19,17 @@ var rename = require('gulp-rename');
 
 gulp.task('scripts', function(){
   gulp.src(['app/scripts/**/*.js', '!dist/scripts/**/*.min.js'])
-   // .pipe(plumber())
-   // .pipe(rename({suffix : '.min'}))
-   // .pipe(uglify())
+   .pipe(plumber())
+   .pipe(rename({suffix : '.min'}))
+   .pipe(uglify())
    .pipe(gulp.dest('dist/scripts'))
-   // .pipe(reload({stream:true}));
+   .pipe(reload({stream:true}));
 });
 
 gulp.task('less', function () {
   return gulp.src('app/less/**/*.less') // Get source files with gulp.src
     .pipe(less()) // Sends it through a gulp plugin
+    .pipe(gulpIf('*.css', cssnano()))
     .pipe(gulp.dest('dist/css')) // Outputs the file in the destination folder
     .pipe(browserSync.reload({
       stream: true
@@ -47,7 +48,10 @@ gulp.task('jade', function () {
 gulp.task('browserSync', function() {
   browserSync.init({
     server: {
-      baseDir: './dist'
+      baseDir: './dist',
+      routes: {
+        "/bower_components": "bower_components"
+      }
     },
   })
 })
@@ -81,7 +85,7 @@ gulp.task('watch', ['browserSync', 'less'] , function (){
   gulp.watch('app/**/*.jade', ['jade']);
   gulp.watch('app/scripts/**/*.js', ['scripts']);
   gulp.watch('app/**/*.html', browserSync.reload);
-  // gulp.watch('app/scripts/*.js', browserSync.reload);
+  gulp.watch('app/scripts/*.js', browserSync.reload);
 })
 
 gulp.task('build', function (callback) {

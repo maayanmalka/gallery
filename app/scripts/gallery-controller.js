@@ -1,10 +1,16 @@
-(function(){
-  alert('test')
-})();
+// (function(){
+//   alert('test')
+// })();
 
 
-// my-script.js
+// // my-script.js
 document.addEventListener("DOMContentLoaded", function() {
     // this function runs when the DOM is ready, i.e. when the document has been parsed
-    document.getElementById("user-greeting").textContent = "Welcome back, Bart";
+
+moshe();
+    // document.getElementById("user-greeting").textContent = "Welcome back, Bart";
 });
+
+var moshe = function(){
+  $('.gallery').show()
+};
