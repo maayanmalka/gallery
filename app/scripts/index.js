@@ -13,6 +13,6 @@ $(document).ready(function() {
 var gallery = {}
 
 gallery.init = function (){
-  return '<div>works</div>'
+  // return '<div>works</div>'
 }
 

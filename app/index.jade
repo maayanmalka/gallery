@@ -2,12 +2,14 @@ doctype html
 html
   head
     title hayoosh
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     link(rel='stylesheet', type='text/css', href='../styles/styles.css')
     script(type='text/javascript', src='bower_components/jquery/dist/jquery.js')
+    script(type='text/javascript', src='bower_components/hammerjs/hammer.js')
     script(type='text/javascript', src='./scripts/gallery-controller.min.js')
-
     script(type='text/javascript', src='./scripts/index.min.js')
 
   body
-    div the gallery
+    div
       include ./gallery/gallery-tamplate.jade
+

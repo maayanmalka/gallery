@@ -1,26 +1,19 @@
 
 .gallery-container {
-  margin: 40px 0;
-  border: 1px solid #e2e2e2;
-  background-color: #dafffe;
-  display: flex;
-  flex-direction: column;
-  // font-size: 100px;
-  color: #aa6763;
-  width: 100%;
-  // max-width: 100%;
-  // max-width: 500px;
-
+  width: 300px;
+  height: 530px;
+  overflow: hidden;
+  margin: 0 auto;
 
   .title {
-    margin: 20px 0 10px 30px;
+    margin: 20px 0 30px 0px;
     color: #000;
     // margin-left: 20px;
 
     h1 {
       font-weight: 100;
-      font-size: 35px;
-      margin: 0 0 10px 0;
+      font-size: 25px;
+      margin: 0 0 4px 0;
       padding: 0;
     }
 
@@ -30,57 +23,68 @@
       color: #999;
       margin: 0;
       padding: 0;
+
+
     }
   }
 
-  .gallery {
-    // background-color: white;
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
-    width: 100%;
-    height: 400px;
+  #gallery {
+    display: block;
+    width: 6000px;
+    height: 300px;
+    margin: 0;
+    padding: 0;
 
     .gallery__item {
 
-      flex-basis: 300px;
-
+      float: left;
       height: 300px;
-      min-width: 300px;
-
-      border: 1px red solid;
-      background-color: pink;
-      padding: 20px;
-      margin: 20px;
-      color: red;
+      width: 300px;
+      // margin: 50px;
+      list-style-type: none;
       text-align: center;
       transition: background-color 200ms ease;
-
-      &:hover{
-        background-color: white;
-      }
-
+    }
+    .gallery__item--1 {
+      background-color: rgba(255, 226, 69, 0.25);
+    }
+    .gallery__item--2 {
+      background-color: rgba(120, 201, 255, 0.25);
+    }
+    .gallery__item--3 {
+      background-color: rgba(255, 128, 167, 0.25);
+    }
+    .gallery__item--4 {
+      background-color: rgba(135, 245, 140, 0.29);
+    }
+    .gallery__item--5 {
+      background-color: rgba(164, 148, 255, 0.25);
     }
   }
   .gallery-controller {
+    margin-top: 10px;
     width: 100%;
     height: 50px;
-    // background-color: blue;
     display: flex;
     justify-content: space-between;
 
 
     .gallery__button {
-      height: 50px;
-      width: 50px;
-      background-color: #000;
+      height: 80px;
+      width: 80px;
+      border-radius: 100%;
+      background-color: #efefef;
       margin: 0 20px ;
-      &:hover {
-        background-color: white;
-      }
     }
   // .gallery__button--right right
 
+  }
+
+  .counter {
+    top: 10px;
+    margin-top: 40px;
+    text-align: center;
+    color: #949494;
   }
 }
 

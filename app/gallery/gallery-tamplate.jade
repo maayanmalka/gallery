@@ -1,16 +1,19 @@
 //- script(type='text/javascript', src='./gallery-controller.min.js')
+
 link(rel='stylesheet', type='text/css', href='../gallery/gallery.css')
 
 .gallery-container
       .title
         h1.hero Image Gallery
-        p.hero Scroll to browse the image gallery
-      .gallery
-        .gallery__item.gallery__item--selecte__item 1
-        .gallery__item 2
-        .gallery__item 3
-        .gallery__item 4
-        .gallery__item 5
+        p.hero Swipe to browse the gallery
+      ul#gallery
+        li.gallery__item.gallery__item--1
+        li.gallery__item.gallery__item--2
+        li.gallery__item.gallery__item--3
+        li.gallery__item.gallery__item--4
+        li.gallery__item.gallery__item--5
+        li.gallery__item.gallery__item--1
       .gallery-controller
-        .gallery__button.gallery__button--left left
-        .gallery__button.gallery__button--right right
+        .gallery__button.gallery__button--left
+        .gallery__button.gallery__button--right
+      p.counter counter
